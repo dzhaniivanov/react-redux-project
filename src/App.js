@@ -1,5 +1,11 @@
+import Counter from "./features/counter/Counter";
+
 function App() {
-  return <main className="app">dsdssdd</main>;
+  return (
+    <main className="App">
+      <Counter />
+    </main>
+  );
 }
 
 export default App;

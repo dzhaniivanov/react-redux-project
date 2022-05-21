@@ -27,8 +27,12 @@ export const updatePost = createAsyncThunk(
   "posts/updatePost",
   async (initialPost) => {
     const { id } = initialPost;
-    const response = await axios.put(`${POSTS_URL}/${id}`, initialPost);
-    return response.data;
+    try {
+      const response = await axios.put(`${POSTS_URL}/${id}`, initialPost);
+      return response.data;
+    } catch (err) {
+      return initialPost;
+    }
   }
 );
 
@@ -36,9 +40,14 @@ export const deletePost = createAsyncThunk(
   "posts/deletePost",
   async (initialPost) => {
     const { id } = initialPost;
-    const response = await axios.delete(`${POSTS_URL}/${id}`);
-    if (response?.status === 200) return initialPost;
-    return `${response?.status} : ${response?.statusText}`;
+    try {
+      const response = await axios.delete(`${POSTS_URL}/${id}`);
+      if (response?.status === 200) return initialPost;
+      return `${response?.status}: ${response?.statusText}`;
+    } catch (err) {
+      //testing redux
+      return err.message;
+    }
   }
 );
 

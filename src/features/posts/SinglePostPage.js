@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PostAuthor from "./PostAuthor";
 import { selectPostById } from "./postsSlice";
 import ReactionsButtons from "./ReactionsButtons";
@@ -16,11 +16,16 @@ const SinglePostPage = () => {
       </section>
     );
   }
+
+
+
+
   return (
     <article>
       <h2>{post.title}</h2>
       <p>{post.body}</p>
       <p className="postCredit">
+          <Link to={`/post/edit/${post.id}`}>Edit Post</Link>
         <PostAuthor userId={post.userId} />
         <TimeAgo timestamp={post.date} />
       </p>
